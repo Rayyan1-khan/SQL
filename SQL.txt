@@ -1,0 +1,422 @@
+SQL COMMANDS;
+
+1:CREATE DATABASE.
+
+syntax:  CREATE DATABASE database_name;
+example; CREATE DATABASE school;
+
+2:SELECT DB;
+
+syntax:	 USE database_name;
+example: USE school;
+
+3:SHOW DB:
+
+syntax:	 SHOW DATABASES;
+example: SHOW DATABASES;
+
+4:DROP DB;
+
+syntax:   DROP DATABASE database_name;
+example:  DROP DATABASE school;
+
+5:CREATE TABLE:
+
+syntax:  CREATE TABLE table_name(
+	 col1 datatype
+	 col2 datatype
+         col3 datatype
+         col4 datatype
+    .....
+     );
+example: CREATE TABLE employeeInfo(
+	 ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	 Emp_name varchar(30) NOT NULL,
+	 Address  varchar(255) NOT NULL,
+	 City     varchar(50) NOT NULL,
+	 Age      int (30) NOT NULL,
+	 DOJ      date(30) NOT NULL,
+	 Designation  varchar(50) NOT NULL,
+	 Salary  decimal(30) NOT NULL,
+	 Mobile  varchar(10) NOT NULL,
+	
+
+);
+
+6:DROP TABLE;
+
+syntax:  DROP TABLE Table_name; 
+example: DROP TABLE employeeInfo;
+
+7:ALTER TABLE;
+ add column and delete column;
+
+syntax: ALTER TABLE Table_name
+        ADD Email varchar(255);
+
+syntax: ALTER TABLE Table_name 
+	DROP Email;
+
+ ===================MYSQL INSERT INTO STATEMENT [CRUD OPERATIONS]====================
+NEW DATA INSERT IN THE TABLE; {plzz check command stricktly while data doesnot go in table}
+
+1: INSERT STATEMENT;  add data in table; ======================[CREATE]
+
+syntax: INSERT INTO table_name(col1,col2,col3,col4,...colN)
+	VALUES (val1,val2,val3,...valN);
+example:
+	INSERT INTO employeeInfo(Emp_name,Address,City,Age,DOJ,Designation,Salary,Mobile)
+	value   ('Ambani','Africa','Mumbai',25,'2022-1-10','Developer',20000.00,'0099887788');
+
+2: SELECT STATEMENT;  show all the table; get data from table;= [READ]
+
+sysntax: SELECT *FROM table_name;
+example: SELECT *FROM employeeInfo; 
+
+sysntax: SELECT Emp_name,age,City FROM table_name;
+example;
+	 SELECT Emp_name,Age,City FROM employeeInfo;
+
+**********************: WHERE CLAUSE;  too much condition is apply here;*********************************
+SYNTAX: 
+	SELECT col1,col2,col3
+	FROM   Table_name
+	WHERE  [condition];
+examples:
+	select Emp_name
+	from employeeInfo
+	where age > 25;
+
+	select Emp_name,age,city  from employeeInfo
+	where age > 25;
+
+	select Emp_name,age,city  from employeeInfo
+	where salary =20000;
+
+3:UPDATE STATMENT;   =========================================[UPDATE]
+syntax:
+	UPDATE tablee_name
+	SET col1 =val1 ,col2 =val2
+	WHERE [condition];
+
+example:
+	UPDATE employeeinfo
+	SET Emp_name ='jeff-bezos'
+	WHERE ID =3;
+
+	
+	UPDATE employeeinfo
+	SET salary ='40000'
+	WHERE Id =3
+
+4"DELETE STATEMENT; =========================================[DELETE]
+syntax:
+	DELETE FROM table_name
+	WHERE ID =7;
+
+syntax: DELETE FROM table_name;    //all records in the table deleted;
+
+example:
+
+	DELETE FROM employeeInfo
+	WHERE id =7;	
+
+RECORD TO DELETE HOJAYEGA LEKIN ID NEXT TIME 8 GENRATE HOGI ,BECAUSE AUTOINCREMENT KI WJH SE;
+
+======================= OPERATOR ========================
+1:AND OPERATOR;  All conditions should be true;
+
+syntax:
+		
+SELECT COL1,COL2
+FROM TABLE_NAME
+WHERE [Cond1] AND [cond2] AND [Cond3];
+	
+SELECT id,Emp_name
+FROM employeeInfo
+WHERE designation ='programer' AND age > 18;
+ 
+SELECT id,Emp_name
+FROM employeeInfo
+WHERE designation ='developer' AND salary = '20000' AND  age > 20;
+
+2:OR OPERATOR; ====== only one condition should be true;
+
+syntax:
+		
+SELECT COL1,COL2
+FROM TABLE_NAME
+WHERE [Cond1] OR [cond2] OR [Cond3];
+
+
+SELECT id,Emp_name
+FROM employeeInfo
+WHERE designation ='progr' OR age > 18;
+ 
+SELECT id,Emp_name
+FROM employeeInfo
+WHERE designation ='developer' OR salary = '2000';
+
+3:NOT OPERATOR; ========;
+
+syntax:
+		
+SELECT COL1,COL2
+FROM TABLE_NAME
+WHERE NOT [Cond1];
+
+SELECT id,Emp_name
+FROM employeeInfo
+WHERE NOT age = 22;
+ 
+SELECT id,Emp_name
+FROM employeeInfo
+WHERE NOT city ='bhopal';
+
+
+4:LIKE OPERATOR ===========
+>STARTING SYMBOL JISKA B HOGA WO AYEGA;
+
+SELECT id,Emp_name
+FROM employeeInfo
+WHERE city LIKE 'b%';
+
+>END SYMBOL JISKA L HOGA WO AYEGA;
+
+SELECT id,Emp_name
+FROM employeeInfo
+WHERE city LIKE '%l';
+
+>UNDERSCORE __AGE KE 2 DIGIT CHHOD K AYEGA JESE 91 ;
+
+SELECT id,Emp_name
+FROM employeeInfo
+WHERE Mobile LIKE '__9%';
+
+>NOT LIKE OPEARTOR
+SELECT id,Emp_name
+FROM employeeInfo
+WHERE city NOT LIKE 'b%';
+
+5:IN OPERATOR:
+
+SELECT * FROM employeeInfo
+WHERE city  IN ('bhopal','istanbul');
+
+SELECT * FROM employeeInfo
+WHERE city NOT IN ('bhopal','istanbul');
+
+6:BETWEEN OPEARTOR;
+
+SELECT * FROM employeeInfo
+WHERE salary BETWEEN 20000 AND 30000;
+
+SELECT * FROM employeeInfo
+WHERE ID BETWEEN 2 AND 5;
+
+7:LIMIT ,FOR TOP ELEMENTS IN TABLE;
+
+SELECT * FROM employeeInfo
+LIMIT 4;
+
+8:ACESNDING AND DECENDING ORDER;
+
+SELECT * FROM employeeInfo
+ORDER BY emp_name,salary;
+
+SELECT * FROM employeeInfo
+ORDER BY emp_name DESC;
+
+============================FUNCTION IN SQL ===============================
+
+ 1:COUNT(),SUM(),AVERAGE();
+
+SELECT COUNT(EMP_NAME) FROM employeeInfo;
+SELECT SUM(salary) FROM employeeInfo;
+SELECT AVG(salary) FROM employeeInfo;
+
+2:MIN(),MAX();
+SELECT emp_name, min(salary) as lowestsalary FROM employeeInfo;
+SELECT emp_name, max(salary) as maxsalary FROM employeeInfo;
+
+3:GROUP BY  ;GROUPING 
+
+SELECT count(designation) , sum(salary), Designation
+FROM employeeinfo
+GROUP BY Designation;
+
+4:BACKUP OR COPY DATA FROM  ONE TABLE TO ANOTHER;
+BOTH TABLE SHOULD BE SAME ATTRIBUTE OTHERWISE ERROR OCCUR;
+
+INSERT INTO new_table
+SELECT * FROM old_table
+where condtion;
+
+CREATE TABLE employeeInfoBackup(
+	 ID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	 Emp_name varchar(30) NOT NULL,
+	 Address  varchar(255) NOT NULL,
+	 City     varchar(50) NOT NULL,
+	 Age      int (30) NOT NULL,
+	 DOJ      date  NOT NULL,
+	 Designation  varchar(50) NOT NULL,
+	 Salary  decimal(15,2) NOT NULL,
+	 Mobile  varchar(10) NOT NULL
+);
+
+SELECT * FROM employeeInfoBackup;
+
+INSERT INTO employeeInfoBackup
+SELECT * FROM employeeInfo;
+
+5:TRUNCATE = ONLY RECORDS WILL BE DELETED BUT IN DROP STRUCTURE ALSO DELETED;
+
+TRUNCATE TABLE table_name;
+TRUNCATE TABLE employeeInfoBackup;
+
+DROP TABLE table_name;
+DROP TABLE employeeInfoBackup;
+
+==============================================================SQL JOINS ===================================================================
+
+one column will be same in both table otherwise join cannot working;
+ITS USED TO JOIN TWO OR MORE TABLE IN THE DATABASE;
+
+#  ----------------SQL JOINS ------------------------------------
+#1-INNER JOIN
+
+CREATE DATABASE company;
+
+show databases;
+
+USE company;
+
+CREATE TABLE customer
+(
+    CustomerId int primary key,
+    CustomerName varchar(20),
+    City varchar(20)
+); 
+
+SELECT * FROM customer;
+
+DELETE FROM customer
+where customerid between 102 AND 110;
+
+INSERT INTO customer VALUES(101,'ASHISH','BHOPAL');
+INSERT INTO customer VALUES(102,'AJAY','DELHI');
+INSERT INTO customer VALUES(103,'BHUPENDRA','MUMBAI');
+INSERT INTO customer VALUES(104,'CHOTU','BHOPAL');
+INSERT INTO customer VALUES(105,'DINESH','DELHI');
+INSERT INTO customer VALUES(106,'RAJU','JAIPUR');
+INSERT INTO customer VALUES(107,'ATUL','KOLKATA');
+INSERT INTO customer VALUES(108,'VINITA','MYSUR');
+INSERT INTO customer VALUES(109,'PINKY','NAINITAL');
+INSERT INTO customer VALUES(110,'VIKKY','BHOPAL');
+
+INSERT INTO customer(customerName,city) VALUES('Rayyan','bhopal');  //data does not match due to id 
+
+
+CREATE TABLE orders(
+	orderId  int,
+    customerId int primary key,
+    orderDate date
+);
+
+SELECT *FROM orders;
+
+INSERT INTO orders VALUES(1,101,'2022-10-23');
+INSERT INTO orders VALUES(2,102,'2021-01-21');
+INSERT INTO orders VALUES(3,103,'2020-11-22');
+INSERT INTO orders VALUES(4,104,'2000-09-25');
+INSERT INTO orders VALUES(5,105,'2019-12-26');
+INSERT INTO orders VALUES(6,106,'2016-11-29');
+INSERT INTO orders VALUES(7,107,'2014-04-12');
+INSERT INTO orders VALUES(8,108,'2021-01-11');
+INSERT INTO orders VALUES(9,109,'2020-11-22');
+INSERT INTO orders VALUES(10,110,'2010-10-03');
+
+INSERT INTO orders VALUES(11,111,'2012-10-03'); // data does not match due to id;
+
+
+
+SELECT orders.orderId ,customer.customerName , orders.orderDate ,customer.city
+FROM orders
+INNER JOIN customer ON customer.customerId = orders.customerId;
+
+SELECT customer.customerName , orders.orderDate
+FROM orders
+INNER JOIN customer ON customer.customerId = orders.customerId;
+
+
+
+#============================= CONSTRAINT = PRITIBANDH ===========================================================================;
+# NOT NULL CONSTRAINT;
+
+CREATE DATABASE ConstraintsExample;
+USE ConstraintsExample;
+
+CREATE TABLE notNUllExample(
+EmpName varchar(30) NOT NULL,
+age int
+);
+
+select * from notNUllExample;
+
+INSERT INTO notNUllExample(eMPNAME,AGE) VALUES('AMIT',23);
+INSERT INTO notNUllExample(AGE) VALUES(23);
+
+DROP TABLE notNUllExample;
+
+# DEFAULT CONSTRAINTS;
+
+CREATE TABLE defaultExample(
+EmpName varchar(30) NOT NULL,
+age int NOT NULL,
+mobile varchar(30) default 'mobile no does\'nt exist'
+);
+
+select * from defaultExample;
+
+INSERT INTO defaultExample(EMPNAME,AGE,MOBILE) VALUES('ROHAN',22,'980777655');
+INSERT INTO defaultExample(EMPNAME,AGE) VALUES('ROHIT',23);
+
+# CHECK CONSTRAINTS;
+
+CREATE TABLE checkExample(
+EmpName varchar(30) NOT NULL,
+age int, check(age >= 18),
+mobile varchar(30) default 'mobile no does\'nt exist'
+);
+
+drop table checkExample;
+truncate table checkExample;
+
+select * from checkExample;
+
+INSERT INTO checkExample(EMPNAME,AGE,MOBILE) VALUES('ROHAN',22,'980777655');
+INSERT INTO checkExample(EMPNAME,AGE,MOBILE) VALUES('ROhitsharma',32,'990977655');
+INSERT INTO checkExample(EMPNAME,AGE) VALUES('Ramu',27);
+
+# UNIQUE CONSTRAINTS;
+PRIMARY KEY AND UNIQUE NEARLY SAME;
+
+CREATE TABLE uniqueExample(
+EmpName varchar(30) UNIQUE NOT NULL,
+age int UNIQUE ,
+mobile varchar(30) UNIQUE
+);
+
+drop table uniqueExample;
+truncate table uniqueExample;
+
+select * from uniqueExample;
+
+INSERT INTO uniqueExample(EMPNAME,AGE,MOBILE) VALUES('ABAAN',22,'980777655');
+INSERT INTO uniqueExample(EMPNAME,AGE,MOBILE) VALUES('KAMIL',32,'990977655');
+INSERT INTO uniqueExample(EMPNAME,AGE) VALUES('Ramu',27);
+INSERT INTO uniqueExample(EMPNAME,AGE,MOBILE) VALUES('RAFI',32,'990977655');
+
+
+
+
