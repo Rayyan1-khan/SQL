@@ -289,6 +289,107 @@ INSERT INTO uniqueExample(EMPNAME,AGE,MOBILE) VALUES('KAMIL',32,'990977655');
 INSERT INTO uniqueExample(EMPNAME,AGE) VALUES('Ramu',27);
 INSERT INTO uniqueExample(EMPNAME,AGE,MOBILE) VALUES('RAFI',32,'990977655');
 
+--        SQL_JOINS    ---------------------------------------------------------  
+
+create database SQL_jOINS;
+show databases;
+
+use sql_joins;
+
+create table Employee
+(
+	EMP_ID int not null primary key,
+    EMP_NAME varchar(30) not null,
+    GENDER varchar(30) not null,
+    AGE int not null,
+    SALARY decimal(15,2) not null
+
+);
+
+insert into employee values(206,'AMAN','MALE',24,350000);
+insert into employee values(208,'TANISHA','FEMALE',27,460000);
+insert into employee values(203,'HARPREET','FEMALE',29,890000);
+insert into employee values(201,'RAM','MALE',23,358000);
+insert into employee values(205,'VISHAL','MALE',25,560000);
+insert into employee values(204,'SHUBHAM','MALE',29,670000);
+insert into employee values(207,'ROHAN','MALE',27,700000);
+insert into employee values(210,'PRIYANKA','FEMALE',28,900000);
+
+select * from employee;
+
+create table emp_Dept
+(
+	DEPT_ID int not null,
+    EMP_ID int not null ,
+    DEPARTMENT varchar(30) not null,
+    CITY varchar(30) not null,
+    PINCODE int not null
+
+);
+
+
+
+insert into emp_dept values(21,205,'HR','BANGLORE',562076);
+insert into emp_dept values(23,203,'DEVELOPER','pUNE',160076);
+insert into emp_dept values(23,206,'DEVELOPER','DELHI',460076);
+insert into emp_dept values(22,207,'SALES','UP',560075);
+insert into emp_dept values(21,201,'HR','MP',5600746);
+insert into emp_dept values(22,210,'SALES','HYDRABAD',660076);
+insert into emp_dept values(24,209,'ANALYST','RAJSTHAN',860076);
+insert into emp_dept values(25,200,'ANALYST','BANGLORE',060076);
+
+select * from emp_dept;
+
+-- ---------------INNER JOIN------------------
+
+select * from employee ,emp_dept where employee.emp_ID = emp_dept.emp_id;
+
+-- inner join 
+select * from employee inner join emp_dept on employee.emp_id = emp_dept.emp_id;
+
+-- inner join = join; 
+select * from employee join emp_dept on employee.emp_id = emp_dept.emp_id;
+
+-- aliasing E1 and E2 table name for short statement ;
+select * from employee E1 join emp_dept E2 on E1.emp_id = E2.emp_id ;
+
+
+-- --------------LEFT JOIN ------------------------
+
+select * from employee  left outer join emp_dept  on employee.emp_id = emp_dept.emp_id ;
+
+select * from employee E1 left outer join emp_dept E2 on E1.emp_id = E2.emp_id ;
+
+select * from employee E1 left join emp_dept E2 on E1.emp_id = E2.emp_id ;
+
+
+-- --------------RIGHT JOIN ------------------------
+
+select * from employee  right outer join emp_dept  on employee.emp_id = emp_dept.emp_id ;
+
+select * from employee E1 right outer join emp_dept E2 on E1.emp_id = E2.emp_id ;
+
+select * from employee E1 right join emp_dept E2 on E1.emp_id = E2.emp_id ;
+
+-- if we swap table than what will be happen; 
+ select * from emp_dept E2 right join employee E1 on E1.emp_id = E2.emp_id ;
+
+-- --------------FULL JOIN ------------------------
+-- error occur here 
+select * from employee  full join emp_dept on employee.emp_id =emp_dept.emp_id;
+
+-- --------------NATURAL JOIN --------------------
+-- 1->WORK AND  SET DEFAULT AS INNER JOIN; AND NOT MENTION CONDITION IN THIS;
+-- 2=>WORK SAME AS INNER JOIN BUT DIFFRENCE IS COLUMN ARE NOT COMMON IN NATURAL JOIN LIKE INNER JOIN;
+
+select * from employee natural join emp_dept;
+-- look like left join 
+select * from employee natural left join emp_dept;
+
+select * from employee natural right join emp_dept;
+
+
+
 
 
 
